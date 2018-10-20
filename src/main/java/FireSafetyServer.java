@@ -1,4 +1,6 @@
-import org.apache.http.NameValuePair;
+package main.java;
+
+/**import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.net.URLDecoder;
@@ -21,7 +23,7 @@ public class FireSafetyServer
     spark documentation
     http://sparkjava.com/documentation
     localhost:4567/hello
-     */
+
 
     FireSafetyServer()
     {
@@ -71,7 +73,7 @@ public class FireSafetyServer
         FireSafetyServer fss = new FireSafetyServer();
 
     }
-    /**
+
      public class FireSafetyServer
      {
      final String apiKey = "f4d59c866d7447cd8b4d93cca544f6d7";
@@ -100,6 +102,12 @@ public class FireSafetyServer
 
      }
 
-     **/
+
 }
 
+**/
+
+public class FireSafetyServer
+        {
+
+        }
