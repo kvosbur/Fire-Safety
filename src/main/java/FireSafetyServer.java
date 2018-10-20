@@ -1,11 +1,13 @@
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.http.NameValuePair;
-package main.java;
-
-/**import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,7 @@ public class FireSafetyServer
     spark documentation
     http://sparkjava.com/documentation
     localhost:4567/hello
-
+    */
 
     FireSafetyServer()
     {
@@ -33,11 +35,6 @@ public class FireSafetyServer
         //adds https capability to server
 
         addroutes();
-    }
-
-    //Not exactly sure why this is here
-    FireSafetyServer(int useless)
-    {
     }
 
     public void addroutes()
@@ -101,6 +98,7 @@ public class FireSafetyServer
 
     }
 
+    /**
      public class FireSafetyServer
      {
      final String apiKey = "f4d59c866d7447cd8b4d93cca544f6d7";
@@ -128,9 +126,10 @@ public class FireSafetyServer
      .executeSync();
 
      }
+     **/
 
 
 }
 
-**/
+
 
