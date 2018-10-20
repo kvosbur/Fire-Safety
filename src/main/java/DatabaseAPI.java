@@ -91,11 +91,8 @@ public class DatabaseAPI {
 
     public static void main(String[] args) {
         try{
-            Problem prob = new Problem("response", 0);
-            prob.addCondition(new Condition("concept1", 0));
-            prob.addCondition(new Condition("concept2", 1));
             DatabaseAPI dapi = new DatabaseAPI();
-            dapi.addProblem(prob);
+            System.out.println(dapi.conceptExists("smoke detectoe"));
         }catch(Exception e){
             e.printStackTrace();
         }
