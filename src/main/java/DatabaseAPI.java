@@ -79,6 +79,16 @@ public class DatabaseAPI {
         }
     }
 
+    public boolean conceptExists(String concept) throws SQLException{
+        PreparedStatement ps = connection.prepareStatement("SELECT condition_id from `condition` where concept = ?");
+        ps.setString(1,concept);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         try{
             Problem prob = new Problem("response", 0);
