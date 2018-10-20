@@ -1,8 +1,13 @@
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +59,32 @@ public class FireSafetyServer
             return "Hope this works";
 
         });
+
+        post("/concept/add", "application/json", ((request, response) ->{
+
+            JsonParser parser = new JsonParser();
+            JsonElement s = parser.parse(request.body());
+            JsonObject dict = s.getAsJsonObject();
+            String response_str = dict.get("response").getAsString();
+            JsonElement url = dict.get("url");
+            JsonArray conditions = dict.getAsJsonArray("conditions");
+
+            ArrayList<Condition> conditionsArr = new ArrayList<>();
+            int type = 0;
+            for(int i = 0; i < conditions.size(); i++){
+                int status = conditions.get(i).getAsJsonArray().get(0).getAsInt();
+                String concept = conditions.get(i).getAsJsonArray().get(1).getAsString();
+                conditionsArr.add(new Condition(concept,status));
+                if(status == 1) {
+                    type = 1;
+                }
+                System.out.println(conditions.get(i).getAsJsonArray().get(1));
+            }
+            Problem prob = new Problem(response_str, type);
+            prob.conditions = conditionsArr;
+            System.out.println(prob);
+            return "";
+        }));
 
     }
 
