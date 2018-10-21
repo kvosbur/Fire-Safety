@@ -2,8 +2,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.omg.CORBA.NameValuePair;
+//import org.apache.http.NameValuePair;
+//import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -43,13 +44,13 @@ public class FireSafetyServer
         post("/image/check", (request, response) ->
         {
 
-            List<NameValuePair> pairs = URLEncodedUtils.parse(request.body(),Charset.defaultCharset());
-            Map<String, String> params = toMap(pairs);
-            String[] b = params.get("images").split(",");
+            //List<NameValuePair> pairs = URLEncodedUtils.parse(request.body(),Charset.defaultCharset());
+            //Map<String, String> params = toMap(pairs);
+            //String[] b = params.get("images").split(",");
             ArrayList<String> urls = new ArrayList<>();
-            for(int i = 0; i < b.length; i++){
-                urls.add(URLDecoder.decode(b[i]));
-            }
+            //for(int i = 0; i < b.length; i++){
+            //    urls.add(URLDecoder.decode(b[i]));
+            //}
 
             DataHandler dh = new DataHandler();
             DatabaseAPI dapi = new DatabaseAPI();
@@ -104,7 +105,7 @@ public class FireSafetyServer
         Map<String, String> map = new HashMap<>();
         for(int i=0; i<pairs.size(); i++){
             NameValuePair pair = pairs.get(i);
-            map.put(pair.getName(), pair.getValue());
+            //map.put(pair.getName(), pair.getValue());
         }
         return map;
     }
