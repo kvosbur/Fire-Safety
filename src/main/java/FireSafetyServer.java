@@ -30,7 +30,7 @@ public class FireSafetyServer
 
     FireSafetyServer()
     {
-        port(20000);
+        port(30000);
 
         //adds https capability to server
 
@@ -64,7 +64,7 @@ public class FireSafetyServer
             JsonElement s = parser.parse(request.body());
             JsonObject dict = s.getAsJsonObject();
             String response_str = dict.get("response").getAsString();
-            String[] urls = dict.get("urls").getAsString().split(",");
+            JsonObject urls = dict.get("urls").getAsJsonObject();
             JsonArray conditions = dict.getAsJsonArray("conditions");
 
             ArrayList<Condition> conditionsArr = new ArrayList<>();
@@ -81,6 +81,19 @@ public class FireSafetyServer
             Problem prob = new Problem(response_str, type);
             prob.conditions = conditionsArr;
             System.out.println(prob);
+
+            ClarifaiHandler ch = new ClarifaiHandler();
+            DatabaseAPI dapi = new DatabaseAPI();
+
+            for(Condition c: prob.conditions){
+                if(urls.get(c.concept) != null && !(dapi.conceptExists(c.concept))){
+                    JsonArray a = urls.get(c.concept).getAsJsonArray();
+                    for(int i = 0; i < a.size(); i++){
+                        //call train method
+                        ch.introduceTrainingData(a.get(i).getAsString(),c.concept);
+                    }
+                }
+            }
 
             return "";
         }));

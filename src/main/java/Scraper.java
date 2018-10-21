@@ -12,17 +12,17 @@ public class Scraper {
 
     private static String api_key = "AIzaSyBlWZ18lP4Wbp7dpO-u0tU1VpSfqrN_bsM";
 
-    public static ArrayList<String> scrape_all() throws Exception{
+    public static ArrayList<String> scrape_all(String search) throws Exception{
         ArrayList<String> images = new ArrayList<>();
         for(int i = 0; i < 6; i++){
-            images.addAll(scrape(i * 10 + 1));
+            images.addAll(scrape(i * 10 + 1, search));
         }
 
         return images;
     }
 
-    public static ArrayList<String> scrape(int start) throws Exception{
-        URL url = new URL("https://www.googleapis.com/customsearch/v1?q=smoke+detector&safe=active&num=10&cx=010710749101572951682:tdhodzxai2i&searchType=image&key=" + api_key + "&start=" + start);
+    public static ArrayList<String> scrape(int start, String search) throws Exception{
+        URL url = new URL("https://www.googleapis.com/customsearch/v1?q=" + search + "&safe=active&num=10&cx=010710749101572951682:tdhodzxai2i&searchType=image&key=" + api_key + "&start=" + start);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setConnectTimeout(5000);
@@ -54,7 +54,7 @@ public class Scraper {
 
     public static void main(String[] args) {
         try {
-            ArrayList<String> images = Scraper.scrape_all();
+            ArrayList<String> images = Scraper.scrape_all("smoke+detector");
             for(int i = 0; i < images.size(); i++){
                 System.out.println(images.get(i));
             }
