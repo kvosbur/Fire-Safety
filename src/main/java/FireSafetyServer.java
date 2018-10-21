@@ -96,6 +96,8 @@ public class FireSafetyServer
                 }
             }
 
+            dapi.addProblem(prob);
+
             return "";
         }));
 
