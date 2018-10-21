@@ -13,7 +13,11 @@ public class DataHandler
 
         for (String url : urls)
         {
-            results.add(ch.getPredictionResult(url));
+            List<Concept> result = ch.getPredictionResult(url);
+
+            results.add(result);
+
+            ch.train(url, threshold(), (Concept[]) result.toArray());
         }
 
         String output = "";
@@ -40,7 +44,7 @@ public class DataHandler
         return output;
     }
 
-    public boolean checkNegatives(List<List<Concept>> results, Problem p)
+    private boolean checkNegatives(List<List<Concept>> results, Problem p)
     {
         //Check every instance of a concept found in any of the images to see if they ever match one of the problem conditions
         //If any of the problem conditions are in one of the images, then there is no problem
@@ -61,7 +65,7 @@ public class DataHandler
         return true;
     }
 
-    public boolean checkPositives(List<List<Concept>> results, Problem p)
+    private boolean checkPositives(List<List<Concept>> results, Problem p)
     {
         //Check every image to see if the necessary conditions in the problem are ever met
         for (List<Concept> concepts : results)
@@ -97,6 +101,7 @@ public class DataHandler
         return false;
     }
 
+    //Potentially consider increasing threshold as the total amount of input data increases
     public double threshold()
     {
         return 0.5;
