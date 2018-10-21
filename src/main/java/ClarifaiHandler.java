@@ -46,9 +46,12 @@ public class ClarifaiHandler extends ClarifaiInteractions
         client.trainModel("fire_safety").executeSync();
     }
 
-    @Override
-    void addConcept(String concept)
+    void introduceTrainingData(String url, String concept)
     {
         client.modifyModel("fire_safety").withConcepts(Action.MERGE, Concept.forID(concept)).executeSync();
+
+        client.addInputs().plus(ClarifaiInput.forImage(url).withConcepts(Concept.forID(concept))).executeSync();
+
+        client.trainModel("fire_safety").executeSync();
     }
 }

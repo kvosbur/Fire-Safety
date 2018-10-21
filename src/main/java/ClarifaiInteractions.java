@@ -6,5 +6,5 @@ abstract class ClarifaiInteractions
 {
     abstract List<Concept> getPredictionResult(String url);
     abstract void train(String url, double threshold, Concept... concepts);
-    abstract void addConcept(String concept);
+    abstract void introduceTrainingData(String url, String concept);
 }
